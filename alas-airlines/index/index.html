@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - 60's rocket launch</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./indexstyle.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+  <style> /* CORE */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #424242;
+  width: 100%;
+  height: 100%;
+}
+
+.fullCentered {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.wrapper {
+  width: 250px;
+  height: 30px;
+  position: relative;
+  background: #728e7a;
+  display: inline-block;
+  color: #424242;
+  animation: createBlock 1s 0s, standUp 0.5s 1s, growNose 1.5s 1.5s, goooooo 6s 3s;
+  animation-fill-mode: forwards;
+}
+.wrapper .text {
+  display: inline-block;
+  font-weight: 900;
+  font-family: Courier;
+  opacity: 0;
+  animation: revealText 0.2s 2.5s;
+  animation-fill-mode: forwards;
+}
+.wrapper .nose,
+.wrapper .left,
+.wrapper .right,
+.wrapper .bottom-right,
+.wrapper .bottom-left {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  border-style: solid;
+  animation-fill-mode: forwards !important;
+  content: ".";
+}
+.wrapper .nose {
+  border-width: 15px 25px 16px 0;
+  border-color: transparent #728e7a transparent transparent;
+  animation: pushNose 1s 1.5s;
+}
+.wrapper .left {
+  border-color: #728e7a transparent transparent transparent;
+  transform: rotate(-45deg);
+  animation: pushLeft 1s 1.5s;
+}
+.wrapper .right {
+  border-color: transparent transparent #728e7a transparent;
+  transform: rotate(45deg);
+  animation: pushRight 1s 1.5s;
+}
+.wrapper .bottom-left {
+  border-color: #728e7a transparent transparent transparent;
+  transform: rotate(-45deg);
+  animation: pushBottomLeft 1s 1.5s;
+}
+.wrapper .bottom-right {
+  border-color: transparent transparent #728e7a transparent;
+  transform: rotate(45deg);
+  animation: pushBottomRight 1s 1.5s;
+}
+
+#refreshAbsolute {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  background: #fafafa;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 999px;
+  text-align: center;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 300ms ease;
+}
+#refreshAbsolute:hover {
+  transform: scale(1.5);
+}
+#refreshAbsolute:active {
+  transform: scale(3);
+}
+
+/* MIXINS */
+@keyframes createBlock {
+  0% {
+    height: 0;
+    width: 5px;
+  }
+  40% {
+    height: 30px;
+  }
+  50% {
+    width: 5px;
+  }
+  100% {
+    width: 250px;
+  }
+}
+@keyframes revealText {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes standUp {
+  0% {
+    transform: translateY(-50%) translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) translateX(-50%) rotate(-180deg);
+  }
+}
+@keyframes growNose {
+  0% {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+  100% {
+    border-top-left-radius: 99px;
+    border-bottom-left-radius: 99px;
+  }
+}
+@keyframes pushNose {
+  0% {
+    opacity: 0;
+    left: -200px;
+  }
+  100% {
+    opacity: 1;
+    left: -14px;
+  }
+}
+@keyframes pushLeft {
+  0% {
+    opacity: 0;
+    border-width: 100px 17px 0 17px;
+    top: 150px;
+    left: 60px;
+  }
+  100% {
+    opacity: 1;
+    border-width: 100px 17px 0 17px;
+    top: 0px;
+    left: 60px;
+  }
+}
+@keyframes pushRight {
+  0% {
+    opacity: 0;
+    border-width: 0 17px 100px 17px;
+    top: -220px;
+    left: 60px;
+  }
+  100% {
+    opacity: 1;
+    border-width: 0 17px 100px 17px;
+    top: -71px;
+    left: 60px;
+  }
+}
+@keyframes pushBottomLeft {
+  0% {
+    opacity: 0;
+    border-width: 100px 17px 0 17px;
+    top: 150px;
+    right: 0;
+  }
+  100% {
+    opacity: 1;
+    right: -25px;
+    border-width: 100px 17px 0 17px;
+    top: 0px;
+  }
+}
+@keyframes pushBottomRight {
+  0% {
+    opacity: 0;
+    border-width: 0 17px 100px 17px;
+    top: -225px;
+    right: 0;
+  }
+  100% {
+    opacity: 1;
+    top: -71px;
+    border-width: 0 17px 100px 17px;
+    right: -25px;
+  }
+}
+@keyframes goooooo {
+  0% {
+    transform: translateY(10%) translateX(50%) rotate(-180deg);
+  }
+  20% {
+    transform: translateY(10%) translateX(500%) rotate(-180deg);
+  }
+  30% {
+    transform: translateY(10%) translateX(2000%) rotate(-180deg);
+  }
+  40% {
+    transform: translateY(10%) translateX(5000%) rotate(-180deg);
+  }
+  100% {
+    transform: translateY(10%) translateX(7500%) rotate(-180deg);
+  }
+}
+  </style>
+  <style> .module {
+  scroll-behavior: [ auto | smooth ];
+}
+  </style>
+  <style> html,body{
+  no overflow:;
+}
+}</style>
+  <style> .fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+  </style>
+  <style> .section .section-center {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+#booking {
+	font-family: 'Montserrat', sans-serif;
+	background-image: url('../img/background.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+#booking::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	background: rgba(47, 103, 177, 0.6);
+}
+
+.booking-form {
+	background-color: #fff;
+	padding: 50px 20px;
+	-webkit-box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+}
+
+.booking-form .form-group {
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.booking-form .form-control {
+	background-color: #ebecee;
+	border-radius: 4px;
+	border: none;
+	height: 40px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	color: #3e485c;
+	font-size: 14px;
+}
+
+.booking-form .form-control::-webkit-input-placeholder {
+	color: rgba(62, 72, 92, 0.3);
+}
+
+.booking-form .form-control:-ms-input-placeholder {
+	color: rgba(62, 72, 92, 0.3);
+}
+
+.booking-form .form-control::placeholder {
+	color: rgba(62, 72, 92, 0.3);
+}
+
+.booking-form input[type="date"].form-control:invalid {
+	color: rgba(62, 72, 92, 0.3);
+}
+
+.booking-form select.form-control {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.booking-form select.form-control+.select-arrow {
+	position: absolute;
+	right: 0px;
+	bottom: 4px;
+	width: 32px;
+	line-height: 32px;
+	height: 32px;
+	text-align: center;
+	pointer-events: none;
+	color: rgba(62, 72, 92, 0.3);
+	font-size: 14px;
+}
+
+.booking-form select.form-control+.select-arrow:after {
+	content: '\279C';
+	display: block;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.booking-form .form-label {
+	display: inline-block;
+	color: #3e485c;
+	font-weight: 700;
+	margin-bottom: 6px;
+	margin-left: 7px;
+}
+
+.booking-form .submit-btn {
+	display: inline-block;
+	color: #fff;
+	background-color: #1e62d8;
+	font-weight: 700;
+	padding: 14px 30px;
+	border-radius: 4px;
+	border: none;
+	-webkit-transition: 0.2s all;
+	transition: 0.2s all;
+}
+
+
+
+.booking-cta {
+	margin-top: 80px;
+	margin-bottom: 30px;
+}
+
+.booking-cta h1 {
+	font-size: 52px;
+	text-transform: uppercase;
+	color: #fff;
+	font-weight: 700;
+}
+
+.booking-cta p {
+	font-size: 16px;
+	color: rgba(255, 255, 255, 0.8);
+}
+  </style>
+</head>
+
+<body>
+  <header class="fixed-header">
+    <script src="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+    <script src="./script.js"></script>
+  </header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container"> <a class="navbar-brand" href="#"><i class="fa d-inline"></i><i class="fa d-inline"></i><i class="fa d-inline"></i>
+        <i class="fa d-inline"></i>
+        <b>ALAS AIRLINES</b><img class="img-fluid d-block w-1 float-left" src="../favicon/icon.png" width="25">
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar11" style="">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar11">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"> <a class="nav-link" href="#">Help Desk</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">Extra</a> </li>
+        </ul>
+        <div align="right">
+          <form class="form-inline">
+            <div class="input-group">
+              <meta name="viewport" content="width=device-width, initial-scale=1" style="">
+              <div class="input-group-append"><button class="btn btn-primary" type="button"><i class="fa fa-user-circle" aria-hidden="true"></i></button></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="m-0 my-0 py-0 bg-light" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-5" style="">
+          <header class="header show-on-scroll">
+            <h1 class="text-center display-3 fade-in pt-3 pb-0 p-0 m-0 mb-0" style="" contenteditable="true">Welcome to Alas Airlines</h1>
+            <h5 class="text-center m-0 fade-in">F L Y&nbsp; S A F E,&nbsp; F L Y&nbsp; W I T H&nbsp; U S</h5>
+          </header>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-light py-4" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="block" class="wrapper fullCentered" style="display: inline-block;">
+            <span class="nose"></span>
+            <span class="left"></span>
+            <span class="right"></span>
+            <span class="bottom-left"></span>
+            <span class="bottom-right"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 bg-light section-parallax">
+    <div class="container">
+      <div class="row" style="">
+        <div class="col-md-5 mr-2" style=""><img class="img-fluid d-block flex-column flex-grow-1 fade-in pl-5 ml-5 mr-4 m-5" src="images/52611.png"></div>
+        <div class="col-md-6 text-left pl-5 ml-3" style="">
+          <h1 class="my-3 mt-5">International Flight</h1>
+          <p class="lead m-2">Take a break from your normal view&nbsp;<br>with Alas Airlines and our trusted<br>global partners. As the most reliable<br>airlines in the United States, we have<br>flights in over 100 countries and provide<br>a safe atmosphere to ensure&nbsp;that you will&nbsp;<br>get where you need to go without any stress.</p>
+        </div>
+      </div>
+      <div class="row my-4 mb-5 pb-3">
+        <div class="col-md-6 ml-5 pl-5" style="">
+          <div class="col-md-12 text-left pl-5 ml-3" style="">
+            <h1 class="my-3 mr-0">Frequent Flyer Program</h1>
+            <p class="lead" contenteditable="true">With our membership program, it is a perfect plan for those who are always flying from place to place. When you are enrolled with Alas Alliance, your points can never expire and take you to over 1,000 destinations.</p>
+          </div>
+        </div>
+        <div class="col-md-3 pl-3 ml-0" style=""><img class="img-fluid d-block ml-1 fade-in" src="images/airplane-silhouette-clipart-free-clip-art-images.png"></div>
+      </div>
+      <div class="row mt-5 pt-5">
+        <div class="col-md-5 mr-2" style=""><img class="img-fluid d-block flex-column flex-grow-1 fade-in ml-5 mr-5 pl-5 pr-3" src="images/138-1382251_this-icon-represents-a-contact-card-contact-info.png"></div>
+        <div class="col-md-6 text-left pl-5 ml-3" style="">
+          <h1 class="my-3">Best Working Environment</h1>
+          <p class="lead mb-5 pb-5">Interested in working with an airlines?&nbsp;<br>With Alas Airlines, you will find comfort<br>in the environment with our safe and&nbsp;<br>friendly atmosphere.&nbsp;</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Get started below by booking a flight.</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 bg-light" style="background-image: linear-gradient(rgb(243, 243, 243), rgb(18, 187, 173)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+    <div class="container">
+      <div class="row" style="">
+        <div class="col-md-4" style="">
+          <div class="booking-form bg-dark mt-5">
+            <form>
+              <div class="form-group">
+                <span class="form-label text-muted">Your Destination</span>
+                <input class="form-control" type="text" placeholder="Enter a destination or hotel name">
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label text-muted">Check In</span>
+                    <input class="form-control" type="date" required="">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label text-muted">Check out</span>
+                    <input class="form-control" type="date" required="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4" style="">
+                  <div class="form-group">
+                    <span class="form-label text-muted">Rooms</span>
+                    <select class="form-control">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-sm-4" style="">
+                  <div class="form-group">
+                    <span class="form-label text-muted">Adults</span>
+                    <select class="form-control">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-sm-4" style="">
+                  <div class="form-group">
+                    <span class="form-label text-muted">Children</span>
+                    <select class="form-control">
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-7" style="">
+                  <div class="form-group">
+                    <span class="form-label text-muted">Travel Class</span>
+                    <select class="form-control">
+                      <option value="0">Economy Class</option>
+                      <option value="1">Business Class</option>
+                      <option value="2">First Class</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-1 col-6" style="">
+                  <meta name="viewport" content="width=device-width, initial-scale=1">
+                  <button class="submit-btn bg-primary py-0 px-2 pt-0 pb-1 m-2 my-2 mx-auto" style=""> Check availability </button>
+                </div>
+              </div>
+              <div class="form-btn" style="">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-push-4 col-md-7 mb-5" style="">
+          <div class="booking-cta">
+            <h1>Book your Flight</h1>
+            <p class="text-muted" contenteditable="true"><b>Our flights range from all over the United States to over 100 more&nbsp;</b><br><b>countries all over the world! With Alas Airlines, international flying is&nbsp;</b><br><b>made easier.</b></p>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <style>
+              body {
+                font-family: Arial;
+              }
+
+              /* Styled tab */
+              .tab {
+                overflow: hidden;
+                border: 1px solid #ccc;
+                background-color: #f1f1f1;
+              }
+
+              /* inside the tab */
+              .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+              }
+
+              /* Changed background color of buttons on hover */
+              .tab button:hover {
+                background-color: #ddd;
+              }
+
+              /* Created an active/current tablink class */
+              .tab button.active {
+                background-color: #ccc;
+              }
+
+              /* Styled the tab content */
+              .tabcontent {
+                display: none;
+                padding: 6px 12px;
+                border: 1px solid #ccc;
+                border-top: none;
+              }
+            </style>
+            <div class="tab bg-info">
+              <button class="tablinks text-muted bg-light active" onclick="openCity(event, 'London')" style="">Arrival</button>
+              <button class="tablinks text-muted bg-light" onclick="openCity(event, 'Paris')">Departure</button>
+            </div>
+            <div id="London" class="tabcontent text-muted bg-light" style="display: block;">
+              <div class="table-responsive">
+                <h4 class="text-dark"><span class="badge badge-pill badge-warning">!</span>&nbsp;<b>Flight Schedules</b>&nbsp;</h4>
+                <table class="table table-striped table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="">Flight</th>
+                      <th scope="col">Destination</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">ML2115</th>
+                      <td>MELBOURNE</td>
+                      <td>LANDED</td>
+                      <td>09:42</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">TO1298</th>
+                      <td>TOKYO</td>
+                      <td>DELAYED</td>
+                      <td>09:56</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">MA1165</th>
+                      <td>MADRID</td>
+                      <td>LANDED</td>
+                      <td>10:15</td>
+                    </tr>
+                    <tr></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="Paris" class="tabcontent bg-light mb-4" style="display: none;">
+              <div class="table-responsive">
+                <h4 class="text-dark"><span class="badge badge-pill badge-warning">!</span>&nbsp;<b>Flight Schedules</b>&nbsp;</h4>
+                <table class="table table-striped table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">Flight</th>
+                      <th scope="col">Destination</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">PR1052</th>
+                      <td>PARIS</td>
+                      <td>DEPARTED</td>
+                      <td>08:10</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">OL1441</th>
+                      <td>OSLO</td>
+                      <td>BOARDING</td>
+                      <td>08:23</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">BR288</th>
+                      <td>BRUSSELS</td>
+                      <td>SCHEDULED</td>
+                      <td>09:05</td>
+                    </tr>
+                    <tr></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="Tokyo" class="tabcontent" style="display: none;">
+            </div>
+            <script>
+              function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                  tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                  tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="text-center mx-auto col-md-12">
+          <div class="booking-cta">
+            <h1>Alas Alliance®</h1>
+            <p class="">What is our membership program? Our frequent flyer program is perfect for people that are always flying from place to place constantly.&nbsp;<br>There’s plenty of great deals and discounts if you are using alas airlines! Click any of the tiers below to join.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 p-3">
+          <div class="card bg-dark text-center text-light">
+            <div class="card-body p-4 text-light">
+              <img class="img-fluid d-block rounded mx-auto m-0" src="images/bronze card.png" width="125">
+              <h3 class="m-0">Bronze</h3>
+              <h2 class="my-2 pb-1"> <b>$10 / month</b> </h2>
+              <p class="text-light">Our Bronze membership offers&nbsp;<br>25% off every round trip flights, making it affordable to get from place to place!</p>
+              <a class="btn btn-primary mt-3" href="#">Start now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 p-3">
+          <div class="card bg-dark text-center text-light">
+            <div class="card-body p-4">
+              <img class="img-fluid d-block mx-auto" src="images/silver card.png" width="125">
+              <h3 class="m-0">Silver</h3>
+              <h2 class="my-2 pb-1"> <b>$30 / month</b> </h2>
+              <p>With Silver tier membership,&nbsp;you can get up to 25%&nbsp; off round trips flights and with every 10 flights, you get one free round flight!<br></p>
+              <a class="btn btn-primary mt-3" href="#">Start now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 p-3">
+          <div class="card bg-dark text-center text-light">
+            <div class="card-body p-4">
+              <img class="img-fluid d-block mx-auto" src="images/cropped-gold-card.png" width="125">
+              <h3 class="m-0">Gold</h3>
+              <h2 class="my-2 pb-1"> <b>$50 / month</b> </h2>
+              <p>In Golden tier Membership, we&nbsp;<br>offer 25% off round trip flights, every 10 flights you earn a free flight, always with business class seats!&nbsp;</p>
+              <a class="btn btn-primary mt-3" href="#">Start now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="">
+          <h1 class="text-center">Save hundreds with Alas Alliance®.</h1>
+          <p class="text-center text-body">For more information, check our About Us or Help Desk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-3 bg-dark text-info" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-6 p-3">
+          <h5> <b>Help</b></h5>
+          <ul class="list-unstyled">
+            <li> <a href="#tips_faqs">Tips and FAQs</a> </li>
+            <li> <a href="#receipts_refunds">Receipts and Refunds</a> </li>
+            <li><a href="#customer_service">Customer service<br></a>
+              <a href="#conditions_carriage">Conditions of carriage<br></a>
+              <a href="#privacy_policy">Privacy Policy<br></a>
+              <a href="#credit">Credit<br></a> </li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-6 p-3">
+          <h5 class="bg-dark text-info"> <b>About</b></h5>
+          <ul class="list-unstyled">
+            <li> <a href="#about">About Us</a> </li>
+            <li> <a href="#careers">Careers</a> </li>
+            <li style=""> <a href="#services">Services</a>
+              <a href="#assistance"><br>Assistance<br></a> </li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-4 p-3">
+          <h5> <b>Follow us</b> </h5>
+          <div class="row">
+            <div class="d-flex align-items-center justify-content-between my-2 col-md-5"> <a href="https://www.facebook.com/AlasAirlines/">
+                <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2"></i>
+              </a> <a href="https://www.instagram.com/alasairlines/">
+                <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
+              </a> <a href="https://twitter.com/alasairlines">
+                <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
+              </a> </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p class="mb-0 mt-2">Copyright © 2020 Alas Airlines. All rights reserved</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+</body>
+
+</html>
